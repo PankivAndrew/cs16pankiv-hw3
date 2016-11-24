@@ -4,16 +4,13 @@ import java.util.Arrays;
 import ua.edu.ucu.functions.MyComparator;
 import ua.edu.ucu.functions.MyFunction;
 import ua.edu.ucu.functions.MyPredicate;
-import ua.edu.ucu.smartarr.BaseArray;
-import ua.edu.ucu.smartarr.FilterDecorator;
-import ua.edu.ucu.smartarr.SmartArray;
-import ua.edu.ucu.smartarr.SortDecorator;
+import ua.edu.ucu.smartarr.*;
 
 public class SmartArrayApp {
 
     public static Integer[]
             filterPositiveIntegersSortAndMultiplyBy2(Integer[] integers) {
-                
+
         MyPredicate pr = new MyPredicate() {
             @Override
             public boolean test(Object t) {
@@ -51,13 +48,54 @@ public class SmartArrayApp {
         Object[] result = sa.toArray();
         return Arrays.copyOf(result, result.length, Integer[].class);
     }
+    public static void Sort( String[] students) {
+        String Array[] = students;
+
+        for (int j = 0; j < Array.length; j++) {
+            for (int i = j + 1; i < Array.length; i++) {
+                if (Array[i].compareTo(Array[j]) < 0) {
+                    String temp = Array[j];
+                    Array[j] = Array[i];
+                    Array[i] = temp;
+
+
+                }
+            }
+
+        }
+    }
+
+
 
     public static String[]
             findDistinctStudentNamesFrom2ndYearWithGPAgt4AndOrderedBySurname(Student[] students) {
+        Integer counter = 0;
+        for (int i = 0; i < students.length;i++){
+            if (students[i].getGPA() >= 4 && students[i].getYear() == 2){
+                counter++;
+            }
+        }
+        String[] to_return =new String[counter];
+        Integer index = 0;
 
-        // Hint: to convert Object[] to String[] - use the following code
-        //Object[] result = studentSmartArray.toArray();
-        //return Arrays.copyOf(result, result.length, String[].class);
-        return null;
+        for (int i = 0; i < students.length;i++){
+            String a = "";
+            if (students[i].getGPA() >= 4 && students[i].getYear() == 2){
+                a += students[i].getSurname() + " " + students[i].getName();
+                to_return[index] = a;
+                index++;
+            }
+        }
+
+
+
+
+
+
+        Sort(to_return);
+
+        return to_return;
     }
+
+
 }
