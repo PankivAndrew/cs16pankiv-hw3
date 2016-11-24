@@ -5,8 +5,10 @@ import ua.edu.ucu.functions.MyComparator;
 import ua.edu.ucu.functions.MyFunction;
 import ua.edu.ucu.functions.MyPredicate;
 import ua.edu.ucu.smartarr.*;
+import ua.edu.ucu.smartarr.DistinctDecorator;
 
 public class SmartArrayApp {
+    static SmartArray arr;
 
     public static Integer[]
             filterPositiveIntegersSortAndMultiplyBy2(Integer[] integers) {
@@ -66,7 +68,6 @@ public class SmartArrayApp {
     }
 
 
-
     public static String[]
             findDistinctStudentNamesFrom2ndYearWithGPAgt4AndOrderedBySurname(Student[] students) {
         Integer counter = 0;
@@ -86,15 +87,12 @@ public class SmartArrayApp {
                 index++;
             }
         }
-
-
-
-
-
-
         Sort(to_return);
+        arr = new BaseArray(to_return);
+        arr = new DistinctDecorator(arr);
+        String[] stringArray = Arrays.copyOf(arr.toArray(), arr.size(), String[].class);
 
-        return to_return;
+        return stringArray;
     }
 
 
